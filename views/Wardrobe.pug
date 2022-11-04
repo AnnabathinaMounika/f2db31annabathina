@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  h1= title
+  - var results = Wardrobe;
+  div(class="container-fluid")
+    each itm,indx in results
+      div(class="row", onclick=`buy(${indx})`)
+        div(class="col-sm-2") #{itm.Wardrobe_type}
+        div(class="col-sm-2") #{itm.Wardrobe_Color}
+        div(class="col-sm-2") #{itm.Wardrobe_Size}
+
+  script.
+        function buy(Amount){
+           alert('You purchased item' + Amount)
+        }
+
+
+  

@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  h1= title
+  p No_Of_rows #{query.rows} and No_Of_columns #{query.cols}
+  - let rows = Number(query.rows);
+  - let col = Number(query.cols);
+  if !(Number.isInteger(rows) && Number.isInteger(col))
+    p either rows or cols is not an integer 
+  else if rows > 10 || rows < 1
+    p rows out of range 
+  else if col  > 10 || col < 1
+    p cols out of range 
+  else 
+    table#outer 
+    - for(let M=0; M<rows ; M++){
+      tr#middle 
+      <br>
+        - for(let N=0 ;N<col ; N++){
+          td= (1 + M + (N * rows)) + "  "
+        - }
+    - }
+
