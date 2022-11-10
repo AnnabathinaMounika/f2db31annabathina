@@ -1,8 +1,15 @@
 var Wardrobe = require('../models/Wardrobe'); 
  
 // List of all Wardrobe
-exports.Wardrobe_list = function(req, res) { 
-    res.send('NOT IMPLEMENTED: Wardrobe list'); 
+exports.Wardrobe_list = async function(req, res) { 
+    try{ 
+        theWardrobe = await Wardrobe.find(); 
+        res.send(theWardrobe); 
+    } 
+    catch(err){ 
+        res.status(500); 
+        res.send(`{"error": ${err}}`); 
+    }  
 }; 
  
 // for a specific Wardrobe. 
