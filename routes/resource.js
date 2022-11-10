@@ -8,7 +8,7 @@ var Wardrobe_controller = require('../controllers/Wardrobe');
 /// API ROUTE /// 
  
 // GET resources base. 
-router.get('/', api_controller.api); 
+router.get('/Wadrobe', api_controller.api); 
  
 /// Wardrobe ROUTES /// 
  
