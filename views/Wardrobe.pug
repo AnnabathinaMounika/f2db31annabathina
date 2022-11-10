@@ -1,19 +1,15 @@
-extends layout
+extends layout 
 
-block content
-  h1= title
-  - var results = Wardrobe;
-  div(class="container-fluid")
-    each itm,indx in results
-      div(class="row", onclick=`buy(${indx})`)
-        div(class="col-sm-2") #{itm.Wardrobe_type}
-        div(class="col-sm-2") #{itm.Wardrobe_Color}
-        div(class="col-sm-2") #{itm.Wardrobe_Size}
+block content 
+    h1= title
+    div.container-fluid
+        div.row
+            each item, index in results
+                div.col-sm-2(onclick=`buy(${index})`) Wardrobe_type:#{item["Wardrobe_type"]} <br> Wardrobe_Color: #{item["Wardrobe_Color"]} <br> Wardrobe_Size: #{item["Wardrobe_Size"]} <br>
+        
 
-  script.
-        function buy(Amount){
-           alert('You purchased item' + Amount)
+    script. 
+        function buy(index) {
+            alert("You purchased item " + index);
         }
-
-
   

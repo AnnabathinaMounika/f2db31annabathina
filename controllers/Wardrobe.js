@@ -31,3 +31,16 @@ exports.Wardrobe_delete = function(req, res) {
 exports.Wardrobe_update_put = function(req, res) { 
     res.send('NOT IMPLEMENTED: Wardrobe update PUT' + req.params.id); 
 }; 
+
+// VIEWS 
+// Handle a show all view 
+exports.Wardrobe_view_all_Page = async function(req, res) { 
+    try{ 
+        theWardrobe = await Wardrobe.find(); 
+        res.render('Wardrobe', { title: 'Wardrobe Search Results', results: theWardrobe }); 
+    } 
+    catch(err){ 
+        res.status(500); 
+        res.send(`{"error": ${err}}`); 
+    }   
+};
