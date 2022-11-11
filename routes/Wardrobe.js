@@ -20,4 +20,6 @@ var router = express.Router();
   res.render('Wardrobe', { title: 'Search Results Wardrobe',Wardrobe : [W1,W2,W3]});
 });*/
 router.get('/', Wardrobe_controlers.Wardrobe_view_all_Page ); 
+router.get('/:id', Wardrobe_controlers.Wardrobe_detail);
+router.put('/:id', Wardrobe_controlers.Wardrobe_update_put);
 module.exports = router;
