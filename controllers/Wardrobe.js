@@ -65,8 +65,8 @@ ${JSON.stringify(req.body)}`)
         // Do updates of properties 
         if(req.body.Wardrobe_type)  
                toUpdate.Wardrobe_type = req.body.Wardrobe_type; 
-        if(req.body.cost) toUpdate.cost = req.body.cost; 
-        if(req.body.size) toUpdate.size = req.body.size; 
+        if(req.body.cost) toUpdate.Wardrobe_Cost = req.body.Wardrobe_Cost; 
+        if(req.body.size) toUpdate.Wardrobe_Size = req.body.Wardrobe_Size; 
         let result = await toUpdate.save(); 
         console.log("Sucess " + result) 
         res.send(result) 
@@ -100,5 +100,45 @@ exports.Wardrobe_delete = async function(req, res) {
     } catch (err) { 
         res.status(500) 
         res.send(`{"error": Error deleting ${err}}`); 
+    } 
+}; 
+ // Handle a show one view with id specified by query 
+ exports.Wardrobe_view_one_Page = async function(req, res) { 
+    console.log("single view for id "  +req.query.id) 
+    try{ 
+        result = await Wardrobe.findById(req.query.id) 
+        res.render('Wardrobedetail',  { title: 'Wardrobe Detail', toShow: result }); 
+    } 
+    catch(err){ 
+        res.status(500) 
+        console.log("error")
+        res.send(`{'error': '${err}'}`); 
+    } 
+}; 
+// Handle building the view for creating a Wardrobe. 
+// No body, no in path parameter, no query. 
+// Does not need to be async 
+exports.Wardrobe_create_Page =  function(req, res) { 
+    console.log("create view") 
+    try{ 
+        res.render('Wardrobecreate', { title: 'Wardrobe Create'}); 
+    } 
+    catch(err){ 
+        res.status(500) 
+        res.send(`{'error': '${err}'}`); 
+    } 
+}
+
+// Handle building the view for updating a costume. 
+// query provides the id 
+exports.Wardrobe_update_Page =  async function(req, res) { 
+    console.log("update view for item "+req.query.id) 
+    try{ 
+        let result = await Wardrobe.findById(req.query.id) 
+        res.render('Wardrobeupdate', { title: 'Wardrobe Update', toShow: result }); 
+    } 
+    catch(err){ 
+        res.status(500) 
+        res.send(`{'error': '${err}'}`); 
     } 
 }; 

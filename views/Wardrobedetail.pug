@@ -1,0 +1,22 @@
+extends layout 
+ 
+block content 
+  h1= title 
+ 
+  - let Wardrobeid = toShow._id 
+  - let Wardrobe_type = toShow.Wardrobe_type 
+  - let Wardrobe_Cost = toShow.Wardrobe_Cost
+  - let Wardrobe_Size = toShow.Wardrobe_Size 
+  div 
+    div.row 
+      div(class='WardrobeAttr mr-3') Wardrobe ID is: 
+      div #{Wardrobeid} 
+    div.row 
+      div(class='WardrobeAttr mr-3') Wardrobe Type is: 
+      div #{Wardrobe_type} 
+    div.row 
+      div(class='WardrobeAttr mr-3') Wardrobe  Cost is: 
+      div #{Wardrobe_Cost} 
+    div.row 
+      div(class='WardrobeAttr mr-3') Wardrobe  Size is: 
+      div #{Wardrobe_Size} 
