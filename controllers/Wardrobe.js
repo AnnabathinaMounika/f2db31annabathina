@@ -129,13 +129,27 @@ exports.Wardrobe_create_Page =  function(req, res) {
     } 
 }
 
-// Handle building the view for updating a costume. 
+// Handle building the view for updating a Wardrobe. 
 // query provides the id 
 exports.Wardrobe_update_Page =  async function(req, res) { 
     console.log("update view for item "+req.query.id) 
     try{ 
         let result = await Wardrobe.findById(req.query.id) 
         res.render('Wardrobeupdate', { title: 'Wardrobe Update', toShow: result }); 
+    } 
+    catch(err){ 
+        res.status(500) 
+        res.send(`{'error': '${err}'}`); 
+    } 
+}; 
+
+// Handle a delete one view with id from query 
+exports.Wardrobe_delete_Page = async function(req, res) { 
+    console.log("Delete view for id "  + req.query.id) 
+    try{ 
+        result = await Wardrobe.findById(req.query.id) 
+        res.render('Wardrobedelete', { title: 'Wardrobe Delete', toShow: 
+result }); 
     } 
     catch(err){ 
         res.status(500) 

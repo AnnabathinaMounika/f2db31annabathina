@@ -1,6 +1,9 @@
 extends layout
 block content
   h1= title
+  if(toShow==null)
+      h2 No instance to Update
+  else
   - let Wardrobeid = toShow._id
   - let  Wardrobe_type  = toShow.Wardrobe_type 
   - let Wardrobe_Color = toShow.Wardrobe_Color 

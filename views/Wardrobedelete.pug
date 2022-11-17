@@ -1,0 +1,52 @@
+extends layout 
+ 
+block content 
+  h1= title
+   if(toShow==null)
+      h2 No instance to Update
+   else
+    - let Wardrobeid = toShow._id
+    - let  Wardrobe_type  = toShow.Wardrobe_type 
+    - let Wardrobe_Color = toShow.Wardrobe_Color 
+    - let Wardrobe_Size  = toShow.Wardrobe_Size 
+    - let actionid = "/resource/Wardrobe/" +watchid
+    script let actionid = "#{actionid}" 
+    div 
+      div.row
+       div(class='WardrobeAttr mr-3') Wardrobe  ID is:
+       div #{Wardrobeid}
+      div.row
+       div(class='WardrobeAttr mr-3') Wardrobe  type is:
+       div #{Wardrobe_type}
+      div.row
+       div(class='WardrobeAttr mr-3') Wardrobe  Size is:
+       div #{Wardrobe_Size}
+      div.row
+       div(class='WardrobeAttr mr-3') Wardrobe  Color is:
+       div #{Wardrobe_Color}
+ 
+    button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete 
+    button(class="btn btn-secondary m-2" onclick="cancel()") Cancel 
+ 
+  script. 
+    function cancel() { 
+      // Go back to the home page for the Wardrobe  collection 
+      window.location.href='/Wardrobe ' 
+    } 
+  script. 
+    function deleteOnid() { 
+      console.log("starting delete") 
+      // delete first 
+      fetch(actionid, { 
+        method: 'DELETE'     
+      }).then((resp) => { 
+        return resp.text (); // or resp.text() or whatever the server sends 
+      }).then((body) => { 
+        alert("Delete succeded") 
+        window.location.href='/Wardrobe ' 
+        // TODO handle body 
+      }).catch((error) => { 
+        console.log(error);
+        alert("Delete failed " + error ) 
+      }); 
+    } 
