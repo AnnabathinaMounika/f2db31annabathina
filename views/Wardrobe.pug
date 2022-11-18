@@ -3,14 +3,20 @@ extends layout
 block content 
     h1= title
     div.container-fluid
-        div.row
+         div(class="row m-1") 
             each item, index in results
+                - let destination = `dispatch(\"/Wardrobe/update?id=${item._id}\")`
                 div.col-sm-2(onclick=`buy(${index})`) Wardrobe_type:#{item["Wardrobe_type"]} <br> Wardrobe_Color: #{item["Wardrobe_Color"]} <br> Wardrobe_Size: #{item["Wardrobe_Size"]} <br>
+                button.btn( class="btn-primary ml-1", onclick= destination) Update 
         
 
     script. 
         function buy(index) {
             alert("You purchased item " + index);
         }
+
+        function dispatch(path){ 
+            window.location.href=path 
+        } 
         
   
