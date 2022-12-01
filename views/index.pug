@@ -1,19 +1,13 @@
-extends layout
-
-block content
-  h1= title
-  p Welcome to #{title}
-  p This is the change with paragraph text in index.pug
-  button(type="button", class="btn btn-secondary", onclick="doBump()") Press Me
-  div(id='bump') Bump the count 
-  script.
-    var count = 0;
-    var bump = 1;
-    function doBump(){
-      count = bump;
-      bump++;
-      document.getElementById("bump").innerHTML = "count" + count + " with bump " + bump;
-    } 
-
-  a(href="/Wardrobe") To know the Wardrobe details please click here
+extends layout 
+ 
+block content 
+  if (!user) 
+    a(href="/login") Login 
+    br 
+    a(href="/register") Register 
+  if (user) 
+    p You are currently logged in as #{user.username} 
+    a(href="/Wardrobe") Take me to Wardrobe 
+    br 
+    a(href="/logout") Logout 
   

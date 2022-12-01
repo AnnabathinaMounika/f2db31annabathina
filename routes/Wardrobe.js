@@ -19,10 +19,20 @@ var router = express.Router();
 
   res.render('Wardrobe', { title: 'Search Results Wardrobe',Wardrobe : [W1,W2,W3]});
 });*/
+// A little function to check if we have an authorized user and continue on 
+//or 
+// redirect to login. 
+const secured = (req, res, next) => { 
+    if (req.user){ 
+      return next(); 
+    } 
+    req.session.returnTo = req.originalUrl; 
+    res.redirect("/login"); 
+  } 
 router.get('/', Wardrobe_controlers.Wardrobe_view_all_Page ); 
 router.get('/detail', Wardrobe_controlers.Wardrobe_view_one_Page); 
 router.get('/create', Wardrobe_controlers.Wardrobe_create_Page);
-router.get('/update', Wardrobe_controlers.Wardrobe_update_Page);  
+router.get('/update', secured,Wardrobe_controlers.Wardrobe_update_Page);   
 router.get('/delete', Wardrobe_controlers.Wardrobe_delete_Page);
 router.get('/:id', Wardrobe_controlers.Wardrobe_detail);
 router.put('/:id', Wardrobe_controlers.Wardrobe_update_put);
