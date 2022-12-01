@@ -15,13 +15,13 @@ block content
   form(id='WardrobeForm', action=actionid, method="PUT")
    div.form-group
     label.WardrobeAttr(for='Wardrobe_type')  Wardrobe type 
-    input#Wardrobe_type(type='text', name='Wardrobe_type')
+    input#Wardrobe_type(type='text', name='Wardrobe_type',value= Wardrobe_type)
    div.form-group
     label.WardrobeAttr(for='Wardrobe_Size')  Wardrobe Size 
-    input#Wardrobe_Size(type='number', name='Wardrobe_Size')
+    input#Wardrobe_Size(type='number', name='Wardrobe_Size',value= Wardrobe_Size)
    div.form-group
     label.WardrobeAttr(for='Wardrobe_Color')  Wardrobe Color
-    input#Wardrobe_Color(type='text', name='Wardrobe_Color')
+    input#Wardrobe_Color(type='text', name='Wardrobe_Color',value= Wardrobe_Color)
    input(type="submit")
   script.
     document.forms['WardrobeForm'].addEventListener('submit', (event) => {
@@ -33,7 +33,8 @@ block content
       }).then((resp) => {
        return resp.text (); // or resp.text() or whatever the server sends
       }).then((body) => {
-       alert("Save succeded")
+        alert("Save succeded")
+         
        // TODO handle body
       }).catch((error) => {
        // TODO handle error

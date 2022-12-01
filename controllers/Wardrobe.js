@@ -1,4 +1,9 @@
 var Wardrobe = require('../models/Wardrobe'); 
+
+// List of all watchs 
+exports.Wardrobe_list = function(req, res) { 
+    res.send('NOT IMPLEMENTED: Wardrobe list'); 
+}; 
  
 // List of all Wardrobe
 exports.Wardrobe_list = async function(req, res) { 
@@ -11,18 +16,20 @@ exports.Wardrobe_list = async function(req, res) {
         res.send(`{"error": ${err}}`); 
     }  
 }; 
- 
-// for a specific Costume. 
-exports.Wardrobe_detail = async function(req, res) { 
-    console.log("detail"  + req.params.id) 
-    try { 
-        result = await Wardrobe.findById( req.params.id) 
-        res.send(result) 
-    } catch (error) { 
-        res.status(500) 
-        res.send(`{"error": document for id ${req.params.id} not found`); 
+
+// VIEWS 
+// Handle a show all view 
+exports.Wardrobe_view_all_Page = async function(req, res) { 
+    try{ 
+        theWardrobe = await Wardrobe.find(); 
+        res.render('Wardrobe', { title: 'Wardrobe Search Results', results: theWardrobe }); 
     } 
-}; 
+    catch(err){ 
+        res.status(500); 
+        res.send(`{"error": ${err}}`); 
+    }   
+};
+
  
 // Handle Wardrobe create on POST. 
 exports.Wardrobe_create_post = async function(req, res) { 
@@ -44,18 +51,18 @@ exports.Wardrobe_create_post = async function(req, res) {
         res.send(`{"error": ${err}}`); 
     }   
 }; 
-
-
-// Handle Wardrobe create on POST. 
-exports.Wardrobe_create_post = function(req, res) { 
-    res.send('NOT IMPLEMENTED: Wardrobe create POST'); 
+// for a specific Costume. 
+exports.Wardrobe_detail = async function(req, res) { 
+    console.log("detail"  + req.params.id) 
+    try { 
+        result = await Wardrobe.findById( req.params.id) 
+        res.send(result) 
+    } catch (error) { 
+        res.status(500) 
+        res.send(`{"error": document for id ${req.params.id} not found`); 
+    } 
 }; 
- 
-// Handle Wardrobe delete form on DELETE. 
-exports.Wardrobe_delete = function(req, res) { 
-    res.send('NOT IMPLEMENTED: Wardrobe delete DELETE ' + req.params.id); 
-}; 
- 
+
 // Handle Wardrobe update form on PUT. 
 exports.Wardrobe_update_put = async function(req, res) { 
     console.log(`update on id ${req.params.id} with body 
@@ -76,20 +83,6 @@ ${JSON.stringify(req.body)}`)
 failed`); 
     } 
 }; 
-
-// VIEWS 
-// Handle a show all view 
-exports.Wardrobe_view_all_Page = async function(req, res) { 
-    try{ 
-        theWardrobe = await Wardrobe.find(); 
-        res.render('Wardrobe', { title: 'Wardrobe Search Results', results: theWardrobe }); 
-    } 
-    catch(err){ 
-        res.status(500); 
-        res.send(`{"error": ${err}}`); 
-    }   
-};
-
 // Handle Wardrobe delete on DELETE. 
 exports.Wardrobe_delete = async function(req, res) { 
     console.log("delete "  + req.params.id) 
@@ -115,6 +108,7 @@ exports.Wardrobe_delete = async function(req, res) {
         res.send(`{'error': '${err}'}`); 
     } 
 }; 
+
 // Handle building the view for creating a Wardrobe. 
 // No body, no in path parameter, no query. 
 // Does not need to be async 
@@ -127,8 +121,7 @@ exports.Wardrobe_create_Page =  function(req, res) {
         res.status(500) 
         res.send(`{'error': '${err}'}`); 
     } 
-}
-
+};
 // Handle building the view for updating a Wardrobe. 
 // query provides the id 
 exports.Wardrobe_update_Page =  async function(req, res) { 
@@ -155,4 +148,5 @@ result });
         res.status(500) 
         res.send(`{'error': '${err}'}`); 
     } 
-}; 
+};
+ 

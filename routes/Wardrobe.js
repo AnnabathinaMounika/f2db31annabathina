@@ -31,9 +31,9 @@ const secured = (req, res, next) => {
   } 
 router.get('/', Wardrobe_controlers.Wardrobe_view_all_Page ); 
 router.get('/detail', Wardrobe_controlers.Wardrobe_view_one_Page); 
-router.get('/create', Wardrobe_controlers.Wardrobe_create_Page);
+router.get('/create', secured,Wardrobe_controlers.Wardrobe_create_Page);
 router.get('/update', secured,Wardrobe_controlers.Wardrobe_update_Page);   
-router.get('/delete', Wardrobe_controlers.Wardrobe_delete_Page);
+router.get('/delete', secured,Wardrobe_controlers.Wardrobe_delete_Page);
 router.get('/:id', Wardrobe_controlers.Wardrobe_detail);
 router.put('/:id', Wardrobe_controlers.Wardrobe_update_put);
 

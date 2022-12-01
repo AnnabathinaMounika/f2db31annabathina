@@ -1,9 +1,8 @@
 const mongoose = require("mongoose") 
 const WardrobeSchema = mongoose.Schema({ 
-    Wardrobe_type: String, 
-    Wardrobe_Color: String, 
-    Wardrobe_Size: Number 
+    Wardrobe_type: {type:String},     
+    Wardrobe_Color: {type:String,minLength: 5},
+    Wardrobe_Size: {type:Number, min:10, max:200}
 }) 
  
-module.exports = mongoose.model("Wardrobe", 
-WardrobeSchema) 
+module.exports = mongoose.model("Wardrobe", WardrobeSchema)
